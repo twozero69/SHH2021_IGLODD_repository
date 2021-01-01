@@ -1,4 +1,4 @@
-# SHH2021_IGLODD_repository
+# 2021서울하드웨어해커톤 IGLODD팀의 저장소
 ## 팀이름
 IGLODD
 

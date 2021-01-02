@@ -6,8 +6,7 @@ IGLODD
 허공터치 & 높이조절 키오스크
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/60468060/103463461-da0e2200-4d6f-11eb-9f02-5c8588d5848d.gif)
-
-
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/60468060/103463528-63255900-4d70-11eb-9bbe-4036cc820001.gif)
 
 ## 작품개요 및 제작동기
 언택트시대 속에서 코로나 감염의 위험으로 많은 자영업자 분들이 손님이 줄어들어 어려움을 겪고 있습니다.

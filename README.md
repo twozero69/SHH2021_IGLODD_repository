@@ -59,6 +59,7 @@ GUI프로그램 라이브러리 : Tkinter
 
 마우스 이동, 클릭 : pyautogui
 
+CubeAI사용여부 : X
 
 ## 기존제품과의 비교
 자료조사 결과 동일한 주제의 제품이 미국 GTT사(http://gtt.co.kr/en/biz/untacttouch.php )에 존재합니다.

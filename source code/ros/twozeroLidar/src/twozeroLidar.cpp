@@ -1,8 +1,8 @@
 #include "twozeroLidar.h"
 
-float dist=0.154;
-float max_x=0.517+dist;
-float max_y=0.161;
+float dist=0.3;
+float max_x=0.507+dist;
+float max_y=0.143;
 
 LIDAR::LIDAR()
 {

@@ -1,9 +1,27 @@
 # -*- coding:utf-8 -*-
 import Tkinter as tk
 from PIL import ImageTk, Image
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
+import json, time
+import playsound as ps
+
+client_id='IGLODDer'
+mqtt_client = AWSIoTMQTTClient(client_id)
+mqtt_client.configureEndpoint("a1lm27anwcfzhd-ats.iot.ap-northeast-2.amazonaws.com", 8883)
+mqtt_client.configureCredentials("/home/pi/certs/root-CA.crt", "/home/pi/certs/IGLODDer.private.key", "/home/pi/certs/IGLODDer.cert.pem")
+mqtt_client.configureOfflinePublishQueueing(-1)
+mqtt_client.configureDrainingFrequency(2)
+mqtt_client.configureConnectDisconnectTimeout(10)
+mqtt_client.configureMQTTOperationTimeout(5)
+mqtt_client.connect()
+mqtt_client.publish("IGLODDer/status", '{"status":"connect"}', 0)
+
 
 class Kiosk():
     def __init__(self):
+        #variable
+        self.__number=1
+
         #main window setting
         self.__window=tk.Tk()
         self.__window.title("Kiosk")
@@ -13,12 +31,12 @@ class Kiosk():
         self.__window.bind('<Alt-Return>', self.typeALTENT)
 
         #image load
-        self.__img1 = ImageTk.PhotoImage(Image.open('1.png'))
-        self.__img2 = ImageTk.PhotoImage(Image.open('2.png'))
-        self.__img3 = ImageTk.PhotoImage(Image.open('3.png'))
-        self.__img4 = ImageTk.PhotoImage(Image.open('4.png'))
-        self.__img5 = ImageTk.PhotoImage(Image.open('5.png'))
-        self.__img6 = ImageTk.PhotoImage(Image.open('6.png'))
+        self.__img1 = ImageTk.PhotoImage(Image.open('amer.png'))
+        self.__img2 = ImageTk.PhotoImage(Image.open('lat.png'))
+        self.__img3 = ImageTk.PhotoImage(Image.open('pucc.png'))
+        self.__img4 = ImageTk.PhotoImage(Image.open('moca.png'))
+        self.__img5 = ImageTk.PhotoImage(Image.open('smoo.png'))
+        self.__img6 = ImageTk.PhotoImage(Image.open('pra.png'))
 
         #button setting
         tk.Button(self.__window,width=370 ,height= 400, command = lambda: self.click(1), image = self.__img1).place(x=100,y=40)
@@ -69,12 +87,23 @@ class Kiosk():
         elif num==6:
             self.__drinkList.insert(0, "프라페 커피")
         root.destroy()
-
+   
     def buy(self):
+        payloads={
+            "number": self.__number
+        }
+        mqtt_client.publish("IGLODDer/number", json.dumps(payloads), 0)
+        time.sleep(1)
+        self.__number+=1
+
+        for string in self.__drinkList.get(0,tk.END):
+            payloads={
+                "order": string
+            }
+            mqtt_client.publish("IGLODDer/order", json.dumps(payloads), 0)
+            time.sleep(1)
+
         self.__drinkList.delete(0, tk.END)
-
-
-
 
 
 def main():

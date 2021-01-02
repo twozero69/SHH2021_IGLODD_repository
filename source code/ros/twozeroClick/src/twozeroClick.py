@@ -9,12 +9,12 @@ import pyautogui
 import time
 screenWidth, screenHeight=pyautogui.size()
 
-dist=0.154
-max_x=0.517+dist
-max_y=0.161
+dist=0.3
+max_x=0.507+dist
+max_y=0.143
 param_x=max_x-dist
-err=40
-err2=50
+err=60
+err2=70
 state = 0
 pos_x = 0
 pos_y = 0 
@@ -50,13 +50,13 @@ def callback(data):
                         state=0
             elif state==2:
                   if pos_x+err2>x and x>pos_x-err2 and pos_y+err2>y and y>pos_y-err2:
-                        if time.time()-start>0.8:
+                        if time.time()-start>0.5:
                               pyautogui.click(pos_y, pos_x)
                               state=-1
                   else:
                         state=0
 
-            #rospy.loginfo("%d: %f", state, time.time()-start)
+            rospy.loginfo("%d: %f", state, time.time()-start)
                   
       else:
             pub.publish(False)
